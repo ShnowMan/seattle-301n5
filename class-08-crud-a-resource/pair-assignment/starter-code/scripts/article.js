@@ -24,7 +24,7 @@
   // DONE: Set up a DB table for articles.
   Article.createTable = function(callback) {
     webDB.execute(
-      `CREATE TABLE articles (
+      `CREATE TABLE IF NOT EXISTS articles (
         id INTEGER PRIMARY KEY,
         title VARCHAR(100) NOT NULL,
         category VARCHAR(100) NOT NULL,
@@ -35,6 +35,7 @@
       );`, // what SQL command do we run here inside these quotes?
       function(result) {
         console.log('Successfully set up the articles table.', result);
+        console.log('This Is Call Back =',callback);
         if (callback) callback();
       }
     );
@@ -43,7 +44,7 @@
   // DONE: Use correct SQL syntax to delete all records from the articles table.
   Article.truncateTable = function(callback) {
     webDB.execute(
-      'DELETE * FROM articles;', // <----finish the command here, inside the quotes.
+      'DELETE FROM articles;', // <----finish the command here, inside the quotes.
       callback
     );
   };
@@ -55,8 +56,8 @@
     webDB.execute(
       [
         {
-          'sql': 'INSERT INTO articles(title, catagory, author, authorUrl, publishedOn, body) VALUES (?, ?, ?, ?, ?, ?;)',
-          'data': [this.title, this.catagory, this.author, this.authorUrl, this.publishedOn, this.body]
+          'sql': 'INSERT INTO articles(title, category, author, authorUrl, publishedOn, body) VALUES (?, ?, ?, ?, ?, ?);',
+          'data': [this.title, this.category, this.author, this.authorUrl, this.publishedOn, this.body]
         }
       ],
       callback
@@ -82,7 +83,7 @@
     webDB.execute(
       [
         {
-          'sql' : 'UPDATE articles SET title = ?, catagory = ?, author = ?, authorUrl = ?, publishedOn = ?, body = ?',
+          'sql' : 'UPDATE articles SET title = ?, category = ?, author = ?, authorUrl = ?, publishedOn = ?, body = ?',
           'data': [ this.title, this.category, this.author, this.authorUrl, this.publishedOn, this.body]
         }
       ],
@@ -113,12 +114,15 @@
           rawData.forEach(function(item) {
             var article = new Article(item); // Instantiate an article based on item from JSON
             // TODO: Cache the newly-instantiated article in the DB: (what can we call on each 'article'?)
+            article.insertRecord();
 
           });
           // Now get ALL the records out the DB, with their database IDs:
-          webDB.execute('', function(rows) { // TODO: select our now full table
+          webDB.execute('SELECT * FROM articles', function(rows) { // DONE: select our now full table
             // TODO: Now, 1st - instanitate those rows with the .loadAll function,
+            Article.loadAll(rows);
             // and 2nd - pass control to the view by calling whichever function argument was passed in to fetchAll.
+            callback();
 
           });
         });
