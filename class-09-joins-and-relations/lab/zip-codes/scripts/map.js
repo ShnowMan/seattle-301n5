@@ -6,5 +6,13 @@ function initMap() {
     zoom: 8
   });
 
+
+
+
+  // webDB.execute([{
+  //         'sql': 'SELECT city, latitude, longitude FROM zips WHERE zip = ?',
+  //         'data' : [$('input name="zip"').val()]
+// }])
+
   // TODO: Follow the Google Maps API docs to create markers on the map based on the search options on the home page.
 }
