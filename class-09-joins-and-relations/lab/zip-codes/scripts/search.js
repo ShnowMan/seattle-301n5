@@ -4,23 +4,23 @@
   // TODO: You will also interact with the map.js file here
   function mapFunc(){}
 
-mapFunc.zipSearch = function(){
-  $('form').on('submit', function(event){
-    event.preventDefault();
-    if($('input name="zip"')){
-      initMap();
-    }
-  })
-}
+  mapFunc.zipSearch = function(){
+    $('form').on('submit', function(event){
+      event.preventDefault();
+      if($('input[name="zip"]')){
+        initMap.update();
+      }
+    })
+  }
 
   mapFunc.statesPop = function(){
-      webDB.execute([{
-        'sql': 'SELECT DISTINCT state FROM zips ORDER BY state'
-      }], function(results){
-        results.forEach(function(result){
-          $('#state-select').append('<option>' + result.state + '</option>')
-        })
-      });
+    webDB.execute([{
+      'sql': 'SELECT DISTINCT state FROM zips ORDER BY state'
+    }], function(results){
+      results.forEach(function(result){
+        $('#state-select').append('<option>' + result.state + '</option>')
+      })
+    });
   };
 
   mapFunc.cityPop = function(){
@@ -36,11 +36,14 @@ mapFunc.zipSearch = function(){
       });
     })
   }
-mapFunc.runFunc = function(){
-  this.statesPop();
-  this.cityPop();
-  this.zipSearch();
-}
+
+  mapFunc.runFunc = function(){
+    this.statesPop();
+    this.cityPop();
+    this.zipSearch();
+  }
+
   module.mapFunc = mapFunc;
 })(window)
+
 mapFunc.runFunc();
