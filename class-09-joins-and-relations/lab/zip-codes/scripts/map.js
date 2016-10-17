@@ -19,6 +19,8 @@ function initMap() {
     })
   }
 
+//I need to make a function similar to the one above, that updates the location of the map to the state and city of the drop down filter. I may skip this step, and just make the makers do that.
+
   // TODO: Follow the Google Maps API docs to create markers on the map based on the search options on the home page.
 
 }
