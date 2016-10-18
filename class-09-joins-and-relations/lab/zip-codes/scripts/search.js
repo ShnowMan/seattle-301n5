@@ -8,7 +8,7 @@
     $('form').on('submit', function(event){
       event.preventDefault();
       if($('input[name="zip"]')){
-        initMap.update();
+        initMap.updateZip();
       }
     })
   }
@@ -37,10 +37,17 @@
     })
   }
 
+  mapFunc.citySearch = function(){
+    $('#city-select').on('change', function(){
+      initMap.updateCity();
+    })
+  }
+
   mapFunc.runFunc = function(){
     this.statesPop();
     this.cityPop();
     this.zipSearch();
+    this.citySearch();
   }
 
   module.mapFunc = mapFunc;
