@@ -29,7 +29,7 @@
         'sql': 'SELECT DISTINCT city FROM zips WHERE state = ? ORDER BY city',
         'data': [$('#state-select').val()]
       }],function(results){
-        $('#city-select option').remove();
+        $('#city-select option').siblings().remove();
         results.forEach(function(result){
           $('#city-select').append('<option>' + result.city + '</option>')
         })
