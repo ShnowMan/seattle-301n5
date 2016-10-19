@@ -30,19 +30,19 @@
     initMap.updateCity = function(){
       webDB.execute([{
         'sql': 'SELECT zip, latitude, longitude FROM zips WHERE state = ? AND city = ?',
-        'data' : [$('#state-select option').val(), $('#city-select option').val()]
-      }],function(city){
-        var option = city[0];
-        console.log($('#city-select option').val());
-        map.map.setCenter({lat: option.latitude, lng: option.longitude})
+        'data' : [$('#state-select').val(), $('#city-select').val()]
+      }],function(option){
+        var city = option[0];
+        map.map.setCenter({lat: city.latitude, lng: city.longitude})
         map.marker = new google.maps.Marker({
-          position:{lat: option.latitude, lng: option.longitude},
+          position:{lat: city.latitude, lng: city.longitude},
           map: map.map
         });
       })
     }
 
-    //I need to make a function similar to the one above, that updates the location of the map to the state and city of the drop down filter. I may skip this step, and just make the makers do that.
+ //Just need to have multipal zip codes marked, as well as removing old marks when switching to new city / zipcode
+
 
     // TODO: Follow the Google Maps API docs to create markers on the map based on the search options on the home page.
 

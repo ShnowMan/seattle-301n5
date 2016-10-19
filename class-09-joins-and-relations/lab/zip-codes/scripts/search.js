@@ -18,7 +18,7 @@
       'sql': 'SELECT DISTINCT state FROM zips ORDER BY state'
     }], function(results){
       results.forEach(function(result){
-        $('#state-select').append('<option>' + result.state + '</option>')
+        $('#state-select').append('<option value = ' + result.state + '>' + result.state + '</option>')
       })
     });
   };
