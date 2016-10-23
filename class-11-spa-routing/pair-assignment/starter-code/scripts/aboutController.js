@@ -5,7 +5,6 @@
   aboutController.index = function() {
     $('.tab-content').hide();
     $('#about').show();
-    console.log('AHAA!');
   };
 
   module.aboutController = aboutController;
