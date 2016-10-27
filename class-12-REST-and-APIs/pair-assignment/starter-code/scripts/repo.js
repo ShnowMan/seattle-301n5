@@ -9,12 +9,13 @@
     // TODONE: How would you like to fetch your repos? Don't forget to call the callback.
     $.ajax({
       type: 'GET',
-      url: 'https://api.github.com/user',
+      url: 'https://api.github.com/user/repos',
       headers: {
         'Authorization': 'token ' + config.githubToken
       },
       success: function(data) {
-
+        repos.all = data;
+        callback();
       }
     });
 
