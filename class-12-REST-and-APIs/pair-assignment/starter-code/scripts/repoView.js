@@ -11,9 +11,10 @@
     $about.show().siblings().hide();
   };
 
-  // TODO: Remember that new Handlebars template? Let's compile it!
+  // TODONE: Remember that new Handlebars template? Let's compile it!
+  let source = $('#repo-template').html();
   // Save the result in this `render` variable.
-  var render;
+  var render = Handlebars.compile(source);
 
   // DONE: If all the data is loaded, we can prep the UI and render the repos.
   repoView.index = function() {
