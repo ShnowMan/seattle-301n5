@@ -39,6 +39,10 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  /*
+   * The same thing as above yet again except this time it gets all articles
+   * by the category.
+   */
   articlesController.loadByCategory = function(ctx, next) {
     var categoryData = function(articlesInCategory) {
       ctx.articles = articlesInCategory;
@@ -49,6 +53,9 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  /*
+   * Yet again the same idea except it gets every article in the database instead.
+   */
   articlesController.loadAll = function(ctx, next) {
     var articleData = function(allArticles) {
       ctx.articles = Article.all;
